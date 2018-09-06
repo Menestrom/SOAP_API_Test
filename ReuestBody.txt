@@ -1,0 +1,25 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bin="http://Bingo.Promotion.Service/" xmlns:bin1="http://Bingo.Service.Data/" xmlns:data="http://Bingo.Promotion.Contract/Data/" xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <bin:GetPromotionPlanRequest>
+         <!--Optional:-->
+         <bin:request>
+            <!--Optional:-->
+            <bin1:NetworkID>29</bin1:NetworkID>
+            <!--Optional:-->
+            <bin1:OperationSourceApplicationID>7</bin1:OperationSourceApplicationID>
+            <!--Optional:-->
+            <bin1:SkinID>29001</bin1:SkinID>
+            <!--Optional:-->
+            <data:CustomersList><!--Zero or more repetitions:-->
+            </data:CustomersList>
+            <!--Optional:-->
+            <data:Name>kokoko</data:Name>
+            <!--Optional:-->
+            <data:PlatformID>21</data:PlatformID><data:PromotionPlanID>471</data:PromotionPlanID>
+            <!--Optional:-->
+            
+         </bin:request>
+      </bin:GetPromotionPlanRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
