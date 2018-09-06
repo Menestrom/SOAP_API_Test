@@ -4,6 +4,7 @@ using System.Xml;
 using System.IO;
 using System.Xml.Linq;
 using System.Threading;
+using System.Xml.Serialization;
 
 namespace Promotion_API_tests
 {
@@ -11,11 +12,12 @@ namespace Promotion_API_tests
     {
         static void Main(string[] args)
         {
-            FormatXML(CallWebService());
+            // FormatXML(CallWebService());
+            CallWebService();
         }
         public static string CallWebService()
         {
-            XmlDocument soapBodyXml = CreateSoapBody();
+            XmlDocument soapBodyXml = XMLCreate.XML();
             HttpWebRequest webRequest = CreateWebRequest(Configurations.PromotionService.URL, 
                                                          Configurations.PromotionService.GetPromotionPlanRequest);
             InsertSoapBodyIntoWebRequest(soapBodyXml, webRequest);
@@ -32,7 +34,7 @@ namespace Promotion_API_tests
                 return soapResult;
             }
         }
-        private static HttpWebRequest CreateWebRequest(string url, string action)
+        public static HttpWebRequest CreateWebRequest(string url, string action)
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.Headers.Add("SOAPAction", action);
@@ -41,13 +43,13 @@ namespace Promotion_API_tests
             webRequest.Accept = "text/xml";
             return webRequest;
         }
-        private static XmlDocument CreateSoapBody()
+        public static XmlDocument CreateSoapBody()
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(@"C:\Users\yevhenta\Documents\Visual Studio 2015\Projects\Promotion_API_tests\Promotion_API_tests\RequestBody.txt");
             return doc;
         }
-        private static void InsertSoapBodyIntoWebRequest(XmlDocument soapBodyXml, HttpWebRequest webRequest)
+        public static void InsertSoapBodyIntoWebRequest(XmlDocument soapBodyXml, HttpWebRequest webRequest)
         {
             using (Stream stream = webRequest.GetRequestStream())
             {
