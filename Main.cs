@@ -12,12 +12,12 @@ namespace Promotion_API_tests
     {
         static void Main(string[] args)
         {
-            // FormatXML(CallWebService());
             CallWebService();
         }
         public static string CallWebService()
         {
-            XmlDocument soapBodyXml = XMLCreate.XML();
+            XmlDocument soapBodyXml = new XmlDocument();
+            soapBodyXml.LoadXml(XMLCreate.XML());
             HttpWebRequest webRequest = CreateWebRequest(Configurations.PromotionService.URL, 
                                                          Configurations.PromotionService.GetPromotionPlanRequest);
             InsertSoapBodyIntoWebRequest(soapBodyXml, webRequest);
@@ -43,12 +43,12 @@ namespace Promotion_API_tests
             webRequest.Accept = "text/xml";
             return webRequest;
         }
-        public static XmlDocument CreateSoapBody()
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"C:\Users\yevhenta\Documents\Visual Studio 2015\Projects\Promotion_API_tests\Promotion_API_tests\RequestBody.txt");
-            return doc;
-        }
+        //public static XmlDocument CreateSoapBody()
+        //{
+        //    XmlDocument doc = new XmlDocument();
+        //    doc.Load(@"C:\Users\yevhenta\Documents\Visual Studio 2015\Projects\Promotion_API_tests\Promotion_API_tests\RequestBody.txt");
+        //    return doc;
+        //}
         public static void InsertSoapBodyIntoWebRequest(XmlDocument soapBodyXml, HttpWebRequest webRequest)
         {
             using (Stream stream = webRequest.GetRequestStream())
