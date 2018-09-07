@@ -2,37 +2,30 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using System.ServiceModel;
 
 namespace Promotion_API_tests
 {
     class XMLCreate
     {
-        //public static XmlDocument XML()
-        //{
-        //    GetPromotionPlanRequest MethodBody = new GetPromotionPlanRequest();
-        //    XmlSerializer method = new XmlSerializer(typeof(GetPromotionPlanRequest));
-        //    // TextWriter txtWriter = new StreamWriter(@"C:\Users\yevhenta\Serialization.xml");
-        //    method.Serialize(txtWriter, MethodBody);
-        //    // txtWriter.Close();
-        //}
-        public static XmlDocument XML(object lol)
+        public static string XML()
         {
-            XmlSerializer ser = new XmlSerializer(lol.GetType());
+            GetPromotionPlanRequest MethodBody = new GetPromotionPlanRequest();
+            XmlSerializer ser = new XmlSerializer(MethodBody.GetType());
             string result = string.Empty;
             using (MemoryStream memStm = new MemoryStream())
             { 
-                ser.Serialize(memStm, lol);
-
+                ser.Serialize(memStm, MethodBody);
                 memStm.Position = 0;
                 result = new StreamReader(memStm).ReadToEnd();
             }
-            XmlDocument xd = new XmlDocument();
-
-            return xd.LoadXml(result);
+            return result;
         }
     }
+    [MessageContract]
     public class GlobalBody
     {
+        [MessageHeader] 
         public int NetworkID = 29;
         public int OperationSourceApplicationID = 7;
         public int SkinID = 29001;
